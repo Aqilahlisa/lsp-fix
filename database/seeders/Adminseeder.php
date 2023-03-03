@@ -21,14 +21,14 @@ class Adminseeder extends Seeder
             [
                 'name'=>'admin',
                 'email'=>'admin@seeder.com',
-                'password'=>Hash::make('passwordadmin'),
+                'password'=>Hash::make('admin1234'),
                 'level'=>'admin',
                 'email_verified_at'=>now()
             ],
             [
              'name'=>'user',
                 'email'=>'user@seeder.com',
-                'password'=>Hash::make('passworduser'),
+                'password'=>Hash::make('user1234'),
                 'level'=>'customer',
                 'email_verified_at'=>now()
             ]

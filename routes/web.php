@@ -13,26 +13,30 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [App\Http\Controllers\custom\WelcomeController::class, 'welcome'])->name('welcome')->middleware('guest');
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 //rute admin
 Route::group(['middleware'=>['auth','admin']], function(){ 
-//untuk akses user admin
+
+//untuk akses user 
+Route::resource('/product', App\Http\Controllers\ProductController::class);
+Route::get('product/show/{id}', [App\Http\Controllers\ProductController::class, 'show']);
+//delete product
+Route::get('product/destroy/{id}',[App\Http\Controllers\ProductController::class, 'destroy'])->name('product.destroy');
 
 });
 
 //rute untuk user customer
 Route::group(['middleware'=>['auth','customer']], function(){
+    Route::resource('/order', App\Http\Controllers\OrderController::class);
 
 });
 
-Route::resource('/product', App\Http\Controllers\ProductController::class);
 
-//delete product
-Route::get('product/destroy/{id}',[App\Http\Controllers\ProductController::class, 'destroy'])->name('product.destroy');
+
+
+
+//
